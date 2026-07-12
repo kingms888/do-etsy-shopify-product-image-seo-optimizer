@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Etsy/Shopify Product Image SEO Optimizer</title>
+  <meta name="description" content="Free SEO tool for Etsy & Shopify sellers: generate alt text, optimized filenames, and compress images to boost search rankings.">
+  <meta name="keywords" content="etsy seo tool, shopify image optimizer, product image alt text generator, ecommerce seo, image compression for seo">
+  <meta name="author" content="Product Image SEO Optimizer">
+  <meta property="og:title" content="Etsy/Shopify Product Image SEO Optimizer">
+  <meta property="og:description" content="Alt text generator, filename optimizer & image compressor for e-commerce sellers.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Etsy/Shopify Product Image SEO Optimizer">
+  <meta name="twitter:description" content="Boost your product image SEO with alt text, filenames & compression.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+    body {
+      background: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      color: #0f172a;
+    }
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -8px rgba(0,0,0,0.1);
+      padding: 1.8rem 1.5rem 2rem;
+      margin: 1rem 0 2rem;
+    }
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .badge {
+      background: #f59e0b;
+      color: #0f172a;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+    .subhead {
+      font-size: 1rem;
+      color: #334155;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #f59e0b;
+      padding-left: 0.8rem;
+      background: #fef9e7;
+      border-radius: 0 12px 12px 0;
+      line-height: 1.4;
+    }
+    .tool-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    @media (min-width: 720px) {
+      .tool-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+      .full-width {
+        grid-column: 1 / -1;
+      }
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 1.5rem 1.2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      border: 1px solid #e9edf2;
+    }
+    .card h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card h2 i {
+      font-size: 1.5rem;
+      font-style: normal;
+    }
+    label {
+      font-weight: 500;
+      font-size: 0.9rem;
+      display: block;
+      margin: 0.75rem 0 0.25rem;
+      color: #1e293b;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid #d1d9e6;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      background: white;
+      transition: 0.2s;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245,158,11,0.2);
+    }
+    textarea {
+      min-height: 70px;
+      resize: vertical;
+    }
+    .btn {
+      background: #0f172a;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 0.15s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+      border: 1px solid transparent;
+    }
+    .btn:hover {
+      background: #1e293b;
+      transform: scale(0.98);
+    }
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #0f172a;
+      border: 1px solid #d1d9e6;
+    }
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+    .result-box {
+      background: #f1f5f9;
+      border-radius: 16px;
+      padding: 0.8rem 1rem;
+      margin-top: 1rem;
+      word-break: break-all;
+      font-size: 0.9rem;
+      border: 1px solid #e2e8f0;
+    }
+    .result-box strong {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #475569;
+      margin-bottom: 0.2rem;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid #cbd5e1;
+      border-radius: 30px;
+      padding: 0.2rem 1rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      margin-left: 0.5rem;
+    }
+    .copy-btn:hover {
+      background: #e2e8f0;
+    }
+    .inline-flex {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .compression-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+      align-items: center;
+    }
+    .compression-preview img {
+      max-width: 100px;
+      max-height: 100px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+    }
+    .file-info {
+      font-size: 0.8rem;
+      color: #475569;
+    }
+    .ad-placeholder {
+      background: #f1f5f9;
+      border-radius: 20px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0 0.5rem;
+      text-align: center;
+      border: 1px dashed #94a3b8;
+      color: #334155;
+      font-size: 0.9rem;
+    }
+    .ad-placeholder span {
+      font-weight: 600;
+    }
+    .affiliate-resources {
+      background: #fefce8;
+      border-radius: 20px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0 0.5rem;
+      border: 1px solid #fde68a;
+    }
+    .affiliate-resources h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .affiliate-resources ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.5rem;
+    }
+    .affiliate-resources li a {
+      color: #0f172a;
+      text-decoration: underline wavy #f59e0b 1px;
+      text-underline-offset: 4px;
+      font-weight: 500;
+    }
+    .privacy-note {
+      background: #f1f5f9;
+      border-radius: 30px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.75rem;
+      color: #475569;
+      margin-top: 1.8rem;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+    }
+    .footer-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 1rem 0;
+    }
+    .tagline {
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+    .compress-status {
+      font-size: 0.85rem;
+      color: #0f172a;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>
+      🖼️ Image SEO Optimizer
+      <span class="badge">Etsy + Shopify</span>
+    </h1>
+    <div class="subhead">
+      ✦ Alt text generator · SEO filename builder · Image compressor — all in one tool for e‑commerce sellers.
+    </div>
+  </header>
+
+  <div class="tool-grid">
+    <!-- Alt text generator -->
+    <div class="card">
+      <h2><i>🔤</i> Alt text generator</h2>
+      <label for="productName">Product name</label>
+      <input type="text" id="productName" placeholder="e.g. Handmade wool beanie" value="Merino wool beanie">
+      <label for="productDesc">Short description (optional)</label>
+      <textarea id="productDesc" placeholder="color, material, style...">Cream chunky knit, unisex</textarea>
+      <label for="targetKeyword">Target keyword (optional)</label>
+      <input type="text" id="targetKeyword" placeholder="e.g. winter hat" value="wool beanie">
+      <button class="btn" id="generateAltBtn">✨ Generate alt text</button>
+      <div class="result-box" id="altResult">
+        <strong>📝 Alt text</strong>
+        <span id="altTextDisplay">Click "Generate alt text"</span>
+        <button class="copy-btn" id="copyAltBtn">📋 copy</button>
+      </div>
+    </div>
+
+    <!-- Filename optimizer -->
+    <div class="card">
+      <h2><i>📁</i> SEO filename builder</h2>
+      <label for="productNameFile">Product name</label>
+      <input type="text" id="productNameFile" placeholder="e.g. Ceramic mug" value="Ceramic mug">
+      <label for="extraKeywords">Extra keywords (comma separated)</label>
+      <input type="text" id="extraKeywords" placeholder="e.g. handmade, gift" value="handmade, stoneware">
+      <button class="btn" id="generateFilenameBtn">🔧 Build filename</button>
+      <div class="result-box">
+        <strong>📎 Optimized filename</strong>
+        <span id="filenameDisplay">ceramic-mug-handmade-stoneware.jpg</span>
+        <button class="copy-btn" id="copyFilenameBtn">📋 copy</button>
+      </div>
+    </div>
+
+    <!-- Image compressor (full width) -->
+    <div class="card full-width">
+      <h2><i>🗜️</i> Image compressor for SEO</h2>
+      <p style="font-size:0.9rem; color:#334155; margin-bottom:0.75rem;">Upload an image (JPEG/PNG/WebP) — compress and preview. Smaller file size helps page speed & SEO.</p>
+      <input type="file" id="imageInput" accept="image/jpeg,image/png,image/webp">
+      <div style="display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; margin-top:0.5rem;">
+        <label for="qualitySlider" style="margin:0;">Quality: <span id="qualityValue">70</span>%</label>
+        <input type="range" id="qualitySlider" min="10" max="95" value="70" style="width:160px;">
+        <button class="btn btn-secondary" id="compressBtn">⬇ Compress & preview</button>
+      </div>
+      <div id="compressionOutput" class="compression-preview" style="min-height:60px;">
+        <span class="file-info" id="compressInfo">No image loaded</span>
+      </div>
+      <div id="compressionMeta" class="file-info" style="margin-top:0.3rem;"></div>
+    </div>
+  </div>
+
+  <!-- Ad placeholder -->
+  <div class="ad-placeholder">
+    <span>📢 Ad ·</span> Boost your Etsy shop with <strong>eRank SEO tool</strong> — <a href="#" style="color:#0f172a;">try free trial</a> (sponsored)
+  </div>
+
+  <!-- Affiliate / resource section -->
+  <div class="affiliate-resources">
+    <h3>📌 Recommended for e‑commerce SEO</h3>
+    <ul>
+      <li><a href="#">Etsy Seller Handbook (official)</a></li>
+      <li><a href="#">Shopify Image SEO guide</a></li>
+      <li><a href="#">TinyPNG (bulk compression)</a></li>
+      <li><a href="#">Alt text best practices</a></li>
+    </ul>
+  </div>
+
+  <!-- Privacy note + event reporter -->
+  <div class="privacy-note">
+    🔒 Privacy: events may be counted anonymously for product improvement. No credentials collected.
+  </div>
+  <div class="footer-meta">
+    <span class="tagline">Made for Etsy sellers, Shopify owners & indie merchants</span>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ---------- event reporter (safe) ----------
+    window.reportEvent = function(name, payload) {
+      if (typeof window.ORGANISM_METRICS_ENDPOINT === 'string' && window.ORGANISM_METRICS_ENDPOINT.length > 0) {
+        try {
+          const body = JSON.stringify({ event: name, payload: payload || {}, timestamp: new Date().toISOString() });
+          fetch(window.ORGANISM_METRICS_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: body,
+            mode: 'no-cors' // avoid CORS issues if endpoint is external
+          }).catch(() => {}); // silent fail
+        } catch (e) { /* ignore */ }
+      }
+    };
+
+    // ---------- DOM refs ----------
+    const productName = document.getElementById('productName');
+    const productDesc = document.getElementById('productDesc');
+    const targetKeyword = document.getElementById('targetKeyword');
+    const generateAltBtn = document.getElementById('generateAltBtn');
+    const altTextDisplay = document.getElementById('altTextDisplay');
+    const copyAltBtn = document.getElementById('copyAltBtn');
+
+    const productNameFile = document.getElementById('productNameFile');
+    const extraKeywords = document.getElementById('extraKeywords');
+    const generateFilenameBtn = document.getElementById('generateFilenameBtn');
+    const filenameDisplay = document.getElementById('filenameDisplay');
+    const copyFilenameBtn = document.getElementById('copyFilenameBtn');
+
+    const imageInput = document.getElementById('imageInput');
+    const qualitySlider = document.getElementById('qualitySlider');
+    const qualityValue = document.getElementById('qualityValue');
+    const compressBtn = document.getElementById('compressBtn');
+    const compressionOutput = document.getElementById('compressionOutput');
+    const compressionMeta = document.getElementById('compressionMeta');
+    const compressInfo = document.getElementById('compressInfo');
+
+    let currentCompressedBlob = null; // for potential download
+
+    // ---------- helper: copy text ----------
+    function copyText(text, btnElement) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          const original = btnElement.textContent;
+          btnElement.textContent = '✅ copied';
+          setTimeout(() => { btnElement.textContent = original; }, 1800);
+        }).catch(() => { fallbackCopy(text, btnElement); });
+      } else {
+        fallbackCopy(text, btnElement);
+      }
+      reportEvent('copy_text', { text: text.substring(0, 40) });
+    }
+
+    function fallbackCopy(text, btn) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        const original = btn.textContent;
+        btn.textContent = '✅ copied';
+        setTimeout(() => { btn.textContent = original; }, 1800);
+      } catch (e) {}
+      document.body.removeChild(textarea);
+    }
+
+    // ---------- Alt text generator ----------
+    function generateAlt() {
+      const name = productName.value.trim();
+      const desc = productDesc.value.trim();
+      const kw = targetKeyword.value.trim();
+      if (!name) {
+        altTextDisplay.textContent = '⚠️ Please enter a product name.';
+        return;
+      }
+      let alt = name;
+      if (desc) alt += ` - ${desc}`;
+      if (kw) alt += ` [${kw}]`;
+      alt = alt.substring(0, 125); // reasonable alt length
+      altTextDisplay.textContent = alt;
+      reportEvent('generate_alt', { product: name, keyword: kw });
+    }
+
+    generateAltBtn.addEventListener('click', generateAlt);
+    // initial
+    generateAlt();
+
+    copyAltBtn.addEventListener('click', function() {
+      const text = altTextDisplay.textContent;
+      if (text && !text.startsWith('⚠️')) {
+        copyText(text, copyAltBtn);
+      }
+    });
+
+    // ---------- Filename builder ----------
+    function buildFilename() {
+      let name = productNameFile.value.trim().toLowerCase();
+      let extras = extraKeywords.value.trim().toLowerCase();
+      if (!name) {
+        filenameDisplay.textContent = 'product-image.jpg';
+        return;
+      }
+      // sanitize: remove special chars, replace spaces with hyphens
+      const sanitize = (str) => str.replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+      let base = sanitize(name);
+      if (extras) {
+        const kwArray = extras.split(',').map(k => sanitize(k.trim())).filter(k => k.length > 0);
+        if (kwArray.length) {
+          base = base + '-' + kwArray.join('-');
+        }
+      }
+      base = base.replace(/^-+|-+$/g, '') || 'product';
+      const filename = base + '.jpg';
+      filenameDisplay.textContent = filename;
+      reportEvent('build_filename', { filename });
+    }
+
+    generateFilenameBtn.addEventListener('click', buildFilename);
+    buildFilename();
+
+    copyFilenameBtn.addEventListener('click', function() {
+      const text = filenameDisplay.textContent;
+      if (text) copyText(text, copyFilenameBtn);
+    });
+
+    // ---------- Image compressor ----------
+    qualitySlider.addEventListener('input', function() {
+      qualityValue.textContent = this.value;
+    });
+
+    let originalFile = null;
+    imageInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        originalFile = file;
+        compressInfo.textContent = `📄 ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+        compressionMeta.textContent = '';
+        // clear previous preview
+        const existingImg = compressionOutput.querySelector('img');
+        if (existingImg) existingImg.remove();
+        // show original preview
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          const img = document.createElement('img');
+          img.src = ev.target.result;
+          img.alt = 'original preview';
+          img.style.maxWidth = '100px';
+          img.style.maxHeight = '100px';
+          compressionOutput.prepend(img);
+        };
+        reader.readAsDataURL(file);
+        reportEvent('image_uploaded', { name: file.name, size: file.size });
+      } else {
+        compressInfo.textContent = 'No image loaded';
+      }
+    });
+
+    compressBtn.addEventListener('click', function() {
+      if (!originalFile) {
+        compressionMeta.textContent = '⚠️ Please select an image first.';
+        return;
+      }
+      const quality = parseInt(qualitySlider.value, 10) / 100;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          // determine mime
+          let mime = 'image/jpeg';
+          if (originalFile.type === 'image/png') mime = 'image/png';
+          else if (originalFile.type === 'image/webp') mime = 'image/webp';
+          canvas.toBlob(function(blob) {
+            if (!blob) {
+              compressionMeta.textContent = '❌ Compression failed.';
+              return;
+            }
+            currentCompressedBlob = blob;
+            const url = URL.createObjectURL(blob);
+            // update preview: remove old compressed img if exists
+            const oldCompressed = compressionOutput.querySelector('img.compressed');
+            if (oldCompressed) oldCompressed.remove();
+            const compressedImg = document.createElement('img');
+            compressedImg.src = url;
+            compressedImg.alt = 'compressed preview';
+            compressedImg.className = 'compressed';
+            compressedImg.style.maxWidth = '100px';
+            compressedImg.style.maxHeight = '100px';
+            compressionOutput.appendChild(compressedImg);
+            const kbBefore = (originalFile.size / 1024).toFixed(1);
+            const kbAfter = (blob.size / 1024).toFixed(1);
+            const savings = ((1 - blob.size / originalFile.size) * 100).toFixed(1);
+            compressionMeta.innerHTML = `📦 Before: ${kbBefore} KB &nbsp;|&nbsp; After: ${kbAfter} KB &nbsp;|&nbsp; Saved ${savings}%`;
+            reportEvent('compress_image', { originalSize: originalFile.size, compressedSize: blob.size, quality: quality });
+          }, mime, quality);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(originalFile);
+    });
+
+    // ---------- initial event (tool loaded) ----------
+    reportEvent('tool_loaded', { page: 'product_image_seo_optimizer' });
+
+    // expose endpoint example (not set by default)
+    // window.ORGANISM_METRICS_ENDPOINT = 'https://example.com/metrics'; // (uncomment to test)
+  })();
+</script>
+
+<!-- ensure endpoint placeholder is defined but not set (safe) -->
+<script>
+  // if you want to test with a dummy endpoint, uncomment line below:
+  // window.ORGANISM_METRICS_ENDPOINT = 'https://httpbin.org/post';
+  // but we leave it undefined so no actual post happens unless user/config sets it.
+</script>
+
+<section data-organism-discovery="hub" style="margin:32px auto 20px;max-width:1040px;padding:16px;border-top:1px solid #d9e2ec;color:#475569;font:14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <strong style="display:block;color:#0f172a;margin-bottom:6px">More free browser tools</strong>
+  <p style="margin:0 0 8px">This page is part of an autonomous micro-tool network. Explore the live tool directory and related utilities.</p>
+  <p style="margin:0"><a href="https://kingms888.github.io/do-digital-organism-index/" style="color:#0f766e;font-weight:700">Open the tool directory</a> </p>
+</section>
+</body>
+</html>
