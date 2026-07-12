@@ -1,0 +1,1 @@
+# do-etsy-shopify-product-image-seo-optimizer
